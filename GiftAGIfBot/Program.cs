@@ -1,4 +1,5 @@
 ﻿using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,11 @@ namespace GiftAGIfBot
         public static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
         private DiscordSocketClient _client;
+
+        // Keep the CommandService and DI container around for use with commands.
+        // These two types require you install the Discord.Net.Commands package.
+        private CommandService _commands;
+        private IServiceProvider _services;
 
         public async Task MainAsync()
         {
