@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiftAGIfBot", "GiftAGIfBot\GiftAGIfBot.csproj", "{B8F9F360-9659-4947-8048-D345DEF4627A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GifBotManager", "GifBotManager\GifBotManager.csproj", "{FB8701C0-5366-4399-AC93-C5BA3943E8C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiftAGifBot.DAL", "GiftAGifBot.DAL\GiftAGifBot.DAL.csproj", "{4270CFD1-3BDA-466A-9A00-827DD8E11201}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{B8F9F360-9659-4947-8048-D345DEF4627A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8F9F360-9659-4947-8048-D345DEF4627A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8F9F360-9659-4947-8048-D345DEF4627A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB8701C0-5366-4399-AC93-C5BA3943E8C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB8701C0-5366-4399-AC93-C5BA3943E8C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB8701C0-5366-4399-AC93-C5BA3943E8C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB8701C0-5366-4399-AC93-C5BA3943E8C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4270CFD1-3BDA-466A-9A00-827DD8E11201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4270CFD1-3BDA-466A-9A00-827DD8E11201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4270CFD1-3BDA-466A-9A00-827DD8E11201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4270CFD1-3BDA-466A-9A00-827DD8E11201}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
