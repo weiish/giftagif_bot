@@ -57,6 +57,7 @@
             this.btnAddGifs.TabIndex = 2;
             this.btnAddGifs.Text = "Add Gifs";
             this.btnAddGifs.UseVisualStyleBackColor = true;
+            this.btnAddGifs.Click += new System.EventHandler(this.btnAddGifs_Click);
             // 
             // frmDashboard
             // 
@@ -70,6 +71,8 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "frmDashboard";
             this.Text = "Dashboard";
+            this.Load += new System.EventHandler(this.frmDashboard_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDashboard_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

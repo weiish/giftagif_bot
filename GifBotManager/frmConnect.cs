@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -47,6 +48,21 @@ namespace GifBotManager
             
         }
 
-
+        private void btnSqlServerConnect_Click(object sender, EventArgs e) {
+            string connectionString = null;
+            SqlConnection cnn;
+            connectionString = @"Data Source=localhost\GIFBOT;Initial Catalog=GIFBOT;integrated security=SSPI;Connection Timeout=2";
+            cnn = new SqlConnection(connectionString);
+            try {
+                cnn.Open();
+                cnn.Close();
+                Hide();
+                frmDashboard frmDashboard = new frmDashboard();
+                frmDashboard.Show();                
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Can not open connection ! ");
+            }
+        }
     }
 }

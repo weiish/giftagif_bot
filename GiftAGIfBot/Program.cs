@@ -60,7 +60,7 @@ namespace GiftAGIfBot
         }
 
         private ServiceProvider ConfigureServices() {
-            return new ServiceCollection()
+            return new ServiceCollection()                
                 .AddSingleton<DiscordSocketClient>()
                 .AddSingleton<CommandService>()
                 .AddSingleton<CommandHandlingService>()

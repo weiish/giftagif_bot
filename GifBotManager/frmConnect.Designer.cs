@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnSqlServerConnect = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblDatabase
@@ -96,11 +97,22 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Password";
             // 
+            // btnSqlServerConnect
+            // 
+            this.btnSqlServerConnect.Location = new System.Drawing.Point(134, 232);
+            this.btnSqlServerConnect.Name = "btnSqlServerConnect";
+            this.btnSqlServerConnect.Size = new System.Drawing.Size(185, 36);
+            this.btnSqlServerConnect.TabIndex = 7;
+            this.btnSqlServerConnect.Text = "SQL Server Connect";
+            this.btnSqlServerConnect.UseVisualStyleBackColor = true;
+            this.btnSqlServerConnect.Click += new System.EventHandler(this.btnSqlServerConnect_Click);
+            // 
             // frmConnect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 250);
+            this.ClientSize = new System.Drawing.Size(467, 291);
+            this.Controls.Add(this.btnSqlServerConnect);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtUsername);
@@ -126,6 +138,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnSqlServerConnect;
     }
 }
 
