@@ -28,6 +28,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.btnAddGifs = new System.Windows.Forms.Button();
+            this.btnQuickAdd = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -41,7 +42,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(22, 126);
+            this.button1.Location = new System.Drawing.Point(22, 186);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 38);
             this.button1.TabIndex = 1;
@@ -55,15 +56,26 @@
             this.btnAddGifs.Name = "btnAddGifs";
             this.btnAddGifs.Size = new System.Drawing.Size(200, 35);
             this.btnAddGifs.TabIndex = 2;
-            this.btnAddGifs.Text = "Add Gifs";
+            this.btnAddGifs.Text = "Add Gifs Manually";
             this.btnAddGifs.UseVisualStyleBackColor = true;
             this.btnAddGifs.Click += new System.EventHandler(this.btnAddGifs_Click);
+            // 
+            // btnQuickAdd
+            // 
+            this.btnQuickAdd.Location = new System.Drawing.Point(22, 128);
+            this.btnQuickAdd.Name = "btnQuickAdd";
+            this.btnQuickAdd.Size = new System.Drawing.Size(200, 35);
+            this.btnQuickAdd.TabIndex = 3;
+            this.btnQuickAdd.Text = "Quick Add Scan";
+            this.btnQuickAdd.UseVisualStyleBackColor = true;
+            this.btnQuickAdd.Click += new System.EventHandler(this.btnQuickAdd_Click);
             // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1147, 826);
+            this.Controls.Add(this.btnQuickAdd);
             this.Controls.Add(this.btnAddGifs);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
@@ -71,8 +83,8 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "frmDashboard";
             this.Text = "Dashboard";
-            this.Load += new System.EventHandler(this.frmDashboard_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDashboard_FormClosing);
+            this.Load += new System.EventHandler(this.frmDashboard_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -83,5 +95,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnAddGifs;
+        private System.Windows.Forms.Button btnQuickAdd;
     }
 }

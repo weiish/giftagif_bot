@@ -16,6 +16,10 @@ namespace GiftAGifBot.DAL.Models
         [ForeignKeyAttribute("CreatorId")]
         public User Creator { get; set; }
 
+        public bool HasBeenModerated { get; set; }
+        public User ModeratedBy { get; set; }
+        public DateTime ModeratedOn { get; set; }
+
         public virtual ICollection<GifTag> GifTags { get; set; }
     }
 }

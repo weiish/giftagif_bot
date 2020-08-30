@@ -19,6 +19,10 @@ namespace GiftAGifBot.DAL.Models
         [ForeignKey("TagId")]
         public Tag Tag { get; set; }
 
+        public bool HasBeenModerated { get; set; }
+        public User ModeratedBy { get; set; }
+        public DateTime ModeratedOn { get; set; }
+
         public virtual ICollection<Endorsement> Endorsements { get; set; }
 
     }

@@ -28,7 +28,7 @@ namespace GifBotManager
             //var optionsBuilder = new DbContextOptionsBuilder<GifContext>();
             //optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["GifModel"].ConnectionString);
             //using (var gifContext = new GifContext(optionsBuilder.Options)) {
-            using (var gifContext = new GifModel()) {
+            using (var gifContext = new GifContext()) {
                 var user = new User { Id = new Guid(), Username = "Raene", Usertag = "4948"};
                 gifContext.Users.Add(user); // Add user
                 gifContext.SaveChanges(); // Save changes to DB
@@ -46,6 +46,12 @@ namespace GifBotManager
 
         private void frmDashboard_FormClosing(object sender, EventArgs e) {
             Application.Exit();
+        }
+
+        private void btnQuickAdd_Click(object sender, EventArgs e) {
+            //Get list of gifs
+            //Get list of all files 
+            //Auto add gifs that are not in database
         }
     }
 }

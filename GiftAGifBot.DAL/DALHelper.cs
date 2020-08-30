@@ -10,7 +10,7 @@ namespace GiftAGifBot.DAL
     public static class DALHelper
     {
         public static User GetManagerUser() {
-            using (var gifContext = new GifModel()) {
+            using (var gifContext = new GifContext()) {
                 return gifContext.Users.First(user => user.Id == User.ManagerId);
             }
         }

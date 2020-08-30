@@ -1,5 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
+using GiftAGifBot.DAL;
+using GiftAGifBot.DAL.Models;
 using GiftAGIfBot.Services;
 using System;
 using System.Collections.Generic;
@@ -35,6 +37,18 @@ namespace GiftAGIfBot.Modules
             user = user ?? Context.User;
 
             await ReplyAsync(user.ToString());
+        }
+
+        [Command("gif")]
+        public async Task GifAsync() {
+            using (var gifContext = new GifContext()) {
+                List<Gif> gifs = gifContext.Gifs.ToList();
+                Random rand = new Random();
+                int num = rand.Next(0, gifs.Count);
+                string fileName = gifs[num].FileName;
+                string fullPath = Gif.TargetDirectory + '\\' + fileName;
+                await Context.Channel.SendFileAsync(fullPath, "Sending random gif #" + num.ToString());
+            }            
         }
 
     }

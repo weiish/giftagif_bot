@@ -18,5 +18,6 @@ namespace GiftAGIfBot.Services
             var resp = await _http.GetAsync("https://cataas.com/cat");
             return await resp.Content.ReadAsStreamAsync();
         }
+
     }
 }

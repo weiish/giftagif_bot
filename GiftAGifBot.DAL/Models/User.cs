@@ -17,7 +17,9 @@ namespace GiftAGifBot.DAL.Models
 
         public virtual ICollection<Endorsement> Endorsements { get; set; }
 
-        public virtual ICollection<Gif> Gifs { get; set; }        
-        
+        public virtual ICollection<Gif> Gifs { get; set; }
+
+        public virtual ICollection<UserRole> UserRoles { get; set; }
+
     }
 }

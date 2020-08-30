@@ -39,6 +39,8 @@
             this.lblIdentifier = new System.Windows.Forms.Label();
             this.chkNSFW = new System.Windows.Forms.CheckBox();
             this.btnAddTag = new System.Windows.Forms.Button();
+            this.lstDuplicate = new System.Windows.Forms.ListView();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picGifPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,9 +48,8 @@
             // 
             this.lstFiles.HideSelection = false;
             this.lstFiles.Location = new System.Drawing.Point(18, 30);
-            this.lstFiles.MultiSelect = false;
             this.lstFiles.Name = "lstFiles";
-            this.lstFiles.Size = new System.Drawing.Size(455, 632);
+            this.lstFiles.Size = new System.Drawing.Size(455, 472);
             this.lstFiles.TabIndex = 0;
             this.lstFiles.UseCompatibleStateImageBehavior = false;
             this.lstFiles.View = System.Windows.Forms.View.List;
@@ -65,7 +66,7 @@
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(18, 680);
+            this.btnBrowse.Location = new System.Drawing.Point(18, 508);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(455, 30);
             this.btnBrowse.TabIndex = 2;
@@ -115,6 +116,8 @@
             this.clbTags.Name = "clbTags";
             this.clbTags.Size = new System.Drawing.Size(223, 484);
             this.clbTags.TabIndex = 8;
+            this.clbTags.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbTags_ItemCheck);
+            this.clbTags.SelectedIndexChanged += new System.EventHandler(this.clbTags_SelectedIndexChanged);
             // 
             // btnDone
             // 
@@ -125,6 +128,7 @@
             this.btnDone.TabIndex = 9;
             this.btnDone.Text = "Done";
             this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // btnCancel
             // 
@@ -172,11 +176,33 @@
             this.btnAddTag.UseVisualStyleBackColor = true;
             this.btnAddTag.Click += new System.EventHandler(this.btnAddTag_Click);
             // 
+            // lstDuplicate
+            // 
+            this.lstDuplicate.HideSelection = false;
+            this.lstDuplicate.Location = new System.Drawing.Point(18, 669);
+            this.lstDuplicate.MultiSelect = false;
+            this.lstDuplicate.Name = "lstDuplicate";
+            this.lstDuplicate.Size = new System.Drawing.Size(455, 141);
+            this.lstDuplicate.TabIndex = 15;
+            this.lstDuplicate.UseCompatibleStateImageBehavior = false;
+            this.lstDuplicate.View = System.Windows.Forms.View.List;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 653);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(131, 13);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Gifs with Duplicate Names";
+            // 
             // frmAddGifs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1633, 822);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lstDuplicate);
             this.Controls.Add(this.btnAddTag);
             this.Controls.Add(this.chkNSFW);
             this.Controls.Add(this.txtIdentifier);
@@ -192,7 +218,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lstFiles);
             this.Name = "frmAddGifs";
-            this.Text = "frmAddGifs";
+            this.Text = "Add Gifs";
             this.Load += new System.EventHandler(this.frmAddGifs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picGifPreview)).EndInit();
             this.ResumeLayout(false);
@@ -216,5 +242,7 @@
         private System.Windows.Forms.Label lblIdentifier;
         private System.Windows.Forms.CheckBox chkNSFW;
         private System.Windows.Forms.Button btnAddTag;
+        private System.Windows.Forms.ListView lstDuplicate;
+        private System.Windows.Forms.Label label2;
     }
 }
