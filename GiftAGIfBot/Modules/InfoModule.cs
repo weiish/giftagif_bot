@@ -39,16 +39,44 @@ namespace GiftAGIfBot.Modules
             await ReplyAsync(user.ToString());
         }
 
+        //[Command("gif")]
+        //public async Task GifAsync() {
+        //    using (var gifContext = new GifContext()) {
+        //        List<Gif> gifs = gifContext.Gifs.ToList();
+        //        Random rand = new Random();
+        //        int num = rand.Next(0, gifs.Count);
+        //        string fileName = gifs[num].FileName;
+        //        string fullPath = Gif.TargetDirectory + '\\' + fileName;
+        //        await Context.Channel.SendFileAsync(fullPath, "Sending random gif #" + num.ToString());
+        //    }
+        //}
+
         [Command("gif")]
-        public async Task GifAsync() {
+        public async Task GifAsync([Summary("Gets Specific Gif By Identifier Number")] int num = -1) {
+            var watch = new System.Diagnostics.Stopwatch();            
+            string comment = "";
             using (var gifContext = new GifContext()) {
-                List<Gif> gifs = gifContext.Gifs.ToList();
-                Random rand = new Random();
-                int num = rand.Next(0, gifs.Count);
-                string fileName = gifs[num].FileName;
+
+                if (num == -1) {
+                    //Get random gif
+                    Random rand = new Random();
+                    num = rand.Next(0, gifContext.Gifs.Count());
+                    comment = "random ";
+                }
+
+                Gif gif = gifContext.Gifs.First(g => g.Identifier == num);
+                if (gif == null) {
+                    await Context.Channel.SendMessageAsync("Gif Not Found");
+                    return;
+                }
+                string fileName = gif.FileName;
                 string fullPath = Gif.TargetDirectory + '\\' + fileName;
-                await Context.Channel.SendFileAsync(fullPath, "Sending random gif #" + num.ToString());
-            }            
+                gif.DisplayCount++;
+                watch.Start();
+                await gifContext.SaveChangesAsync();
+                watch.Stop();
+                await Context.Channel.SendFileAsync(fullPath, "Sending " + comment + "gif #" + num.ToString() + " took " + watch.ElapsedMilliseconds.ToString() + " ms to save");
+            }
         }
 
     }

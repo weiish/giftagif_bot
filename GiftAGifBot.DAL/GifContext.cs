@@ -4,6 +4,8 @@ namespace GiftAGifBot.DAL
     using System;
     using System.Data.Entity;
     using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     public class GifContext : DbContext
     {
@@ -39,10 +41,36 @@ namespace GiftAGifBot.DAL
 
                 if (entityEntry.State == EntityState.Added) {
                     ((Entity)entityEntry.Entity).CreatedOn = DateTime.Now;
+
+                    //If we are adding a gif, auto populate the identifier as the next number with stored proc
+                    var castGif = entityEntry.Entity as Gif;
+                    if (castGif != null) {
+                        castGif.Identifier = Database.SqlQuery<int>("GetNextGifIdentifier", new object[] { }).First();
+                    }
                 }
             }
 
             return base.SaveChanges();
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken)) {
+            var entries = ChangeTracker.Entries().Where(e => e.Entity is Entity && (e.State == EntityState.Added || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries) {
+                ((Entity)entityEntry.Entity).ModifiedOn = DateTime.Now;
+
+                if (entityEntry.State == EntityState.Added) {
+                    ((Entity)entityEntry.Entity).CreatedOn = DateTime.Now;
+
+                    //If we are adding a gif, auto populate the identifier as the next number with stored proc
+                    var castGif = entityEntry.Entity as Gif;
+                    if (castGif != null) {
+                        castGif.Identifier = Database.SqlQuery<int>("GetNextGifIdentifier", new object[] { }).First();
+                    }
+                }
+            }
+
+            return (await base.SaveChangesAsync(cancellationToken));
         }
     }
 

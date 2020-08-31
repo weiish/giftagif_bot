@@ -47,7 +47,6 @@ namespace GifBotManager
                     try {
                         lstFiles.Items.RemoveByKey(file);
                         Gif gif = gifDictionary[Path.GetFileName(file)];
-                        gif.Identifier = gifContext.Database.SqlQuery<int>("GetNextGifIdentifier", new object[] { }).First();
                         gifContext.Gifs.Add(gif);
                         foreach (var giftag in gif.GifTags) {
                             gifContext.Entry(giftag.Tag).State = System.Data.Entity.EntityState.Unchanged;

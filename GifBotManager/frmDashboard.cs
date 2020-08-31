@@ -7,15 +7,17 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GifBotManager
 {
     public partial class frmDashboard : Form
-    {
+    {        
         DBConnection dbCon;
         public frmDashboard() {
             InitializeComponent();
@@ -48,10 +50,76 @@ namespace GifBotManager
             Application.Exit();
         }
 
-        private void btnQuickAdd_Click(object sender, EventArgs e) {
-            //Get list of gifs
-            //Get list of all files 
-            //Auto add gifs that are not in database
+        private async void btnQuickAdd_Click(object sender, EventArgs e) {
+            CancellationTokenSource cts = new CancellationTokenSource();
+            Progress<BaseProgressReportModel> progress = new Progress<BaseProgressReportModel>();
+            frmProgressBarPopUp frmProgress = new frmProgressBarPopUp(progress, cts);           
+            frmProgress.Show();
+            try {
+                await QuickAddAsync(progress, cts.Token);
+            } catch (OperationCanceledException) {
+                
+            }
+            
         }
+
+        private async Task QuickAddAsync(IProgress<BaseProgressReportModel> progress, CancellationToken cancellationToken) {
+            int completed = 0;
+            int numNewGifs = 0;
+            int totalGifs = 0;
+            progress.Report(new BaseProgressReportModel() {
+                MainTask = "Quick Add Gifs",
+                CurrentTask = "Starting",
+                PercentageComplete = 0,
+                SpecialInfo = "Total New Gifs: " + numNewGifs.ToString(),
+                CanCancel = true
+            });
+            using (var gifcontext = new GifContext()) {
+                var gifHashSet = new HashSet<string>(gifcontext.Gifs.Select(gif => gif.FileName));               
+                string[] files = Directory.GetFiles(Gif.TargetDirectory);
+                totalGifs = files.Length;
+                foreach (var file in files) {
+                    completed++;
+                    if (!gifHashSet.Contains(Path.GetFileName(file))) {
+                        gifcontext.Gifs.Add(new Gif() { FileName = Path.GetFileName(file), CreatorId = User.ManagerId });
+                        numNewGifs++;
+                        progress.Report(new BaseProgressReportModel() {
+                            MainTask = "Quick Add Gifs",
+                            CurrentTask = "Added " + file,
+                            SpecialInfo = "Total New Gifs: " + numNewGifs.ToString(),
+                            PercentageComplete = (completed * 100 / (totalGifs + 10)) }); ;                        
+                    } else {
+                        progress.Report(new BaseProgressReportModel() {
+                            MainTask = "Quick Add Gifs",
+                            CurrentTask = "Scanned Duplicate " + file,
+                            SpecialInfo = "Total New Gifs: " + numNewGifs.ToString(),
+                            PercentageComplete = (completed * 100 / (totalGifs + 10)) });
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                }
+                
+                if (numNewGifs > 0) {
+                    progress.Report(new BaseProgressReportModel() {
+                        MainTask = "Quick Add Gifs",
+                        CurrentTask = "Saving Changes to Database...",
+                        PercentageComplete = (completed * 100 / (totalGifs + 10)),
+                        SpecialInfo = "Total New Gifs: " + numNewGifs.ToString(),
+                        CanCancel = false
+                    }); ;
+                    await Task.Delay(1000);
+
+                    await gifcontext.SaveChangesAsync();
+                }
+
+                progress.Report(new BaseProgressReportModel() {
+                    MainTask = "Quick Add Gifs",
+                    CurrentTask = String.Format("Added {0} new gifs for a total of {1} gifs", numNewGifs, totalGifs),
+                    PercentageComplete = 100,
+                    SpecialInfo = "Total New Gifs: " + numNewGifs.ToString(),
+                    CanCancel = false
+                });
+            }
+        }
+        
     }
 }
